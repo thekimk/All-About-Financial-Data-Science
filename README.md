@@ -1,7 +1,7 @@
 ## ✔️ Fast Campus Online All-in-one Package
 
 > 파이썬을 활용한 금융공학 및 금융데이터분석 강의자료 공간입니다.
-- **강의링크:** https://fastcampus.co.kr/fin_online_quant
+- **강의소개:** https://fastcampus.co.kr/fin_online_quant
 - **공지사항:**
   - 모든 강의자료는 `Github`로 공유될 예정입니다.
   - 강의 구성에 따라서 강의자료와 강의영상의 `목차구성 넘버링`이 차이가 있을 수 있으나, `강의자료 기준`이 정확합니다.
