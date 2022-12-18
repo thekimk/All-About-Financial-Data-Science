@@ -119,7 +119,7 @@ def plot_prediction(Y_true_pred):
 
 
 # 검증 함수화
-def evaluation(Y_real, Y_pred):
+def evaluation_reg(Y_real, Y_pred):
     MAE = mean_absolute_error(Y_real, Y_pred)
     MSE = mean_squared_error(Y_real, Y_pred)
     MAPE = mean_absolute_percentage_error(Y_real, Y_pred)
@@ -128,9 +128,9 @@ def evaluation(Y_real, Y_pred):
     return Score
 
 # Train & Test 모두의 검증 함수화
-def evaluation_trte(Y_real_tr, Y_pred_tr, Y_real_te, Y_pred_te):
-    Score_tr = evaluation(Y_real_tr, Y_pred_tr)
-    Score_te = evaluation(Y_real_te, Y_pred_te)
+def evaluation_reg_trte(Y_real_tr, Y_pred_tr, Y_real_te, Y_pred_te):
+    Score_tr = evaluation_reg(Y_real_tr, Y_pred_tr)
+    Score_te = evaluation_reg(Y_real_te, Y_pred_te)
     Score_trte = pd.concat([Score_tr, Score_te], axis=0)
     Score_trte.index = ['Train', 'Test']
 

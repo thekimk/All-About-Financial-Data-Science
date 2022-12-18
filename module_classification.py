@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 from sklearn.metrics import confusion_matrix, classification_report 
+from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.metrics import roc_curve, auc, precision_recall_curve
 
 
@@ -164,7 +165,7 @@ def evaluation_class_ROCAUC(Y_true, P_pred, figsize=(10,5), label='Logistic Regr
     plt.legend(loc='best', fontsize=12)
     plt.grid()
     plt.show()
-
+    
 
 # Precision & Recall Curve 함수화
 def evaluation_class_PrecisionRecall(Y_true, P_pred, figsize=(10,5)):
@@ -180,3 +181,13 @@ def evaluation_class_PrecisionRecall(Y_true, P_pred, figsize=(10,5)):
     plt.legend(loc='best', fontsize=12)
     plt.grid()
     plt.show()
+    
+    
+# Accuracy & AUC 함수화
+def evaluation_class_AccuracyAUC(Y_train, Y_trpred, Y_test, Y_tepred):
+    score = pd.DataFrame([[accuracy_score(Y_train, Y_trpred), 
+                           roc_auc_score(Y_train, Y_trpred)],
+                          [accuracy_score(Y_test, Y_tepred), 
+                           roc_auc_score(Y_test, Y_tepred)]],
+                         index=['Train', 'Test'], columns=['Accuracy', 'AUC'])
+    return score
