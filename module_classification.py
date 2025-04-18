@@ -57,8 +57,11 @@ def prep(df):
 
 
 # 데이터 분리
-def datasplit(df, Y_colname, test_size=0.2, random_state=123):
-    X_colname = [x for x in df.columns if x not in Y_colname]
+def datasplit(df, Y_colname, X_delete=None, test_size=0.2, random_state=123):
+    if X_delete != None:
+        X_colname = [x for x in df.columns if x not in Y_colname+X_delete]
+    else:
+        X_colname = [x for x in df.columns if x not in Y_colname]
        
     X_train, X_test, Y_train, Y_test = train_test_split(df[X_colname], df[Y_colname],
                                                         test_size=test_size, random_state=random_state)
@@ -184,10 +187,10 @@ def evaluation_class_PrecisionRecall(Y_true, P_pred, figsize=(10,5)):
     
     
 # Accuracy & AUC 함수화
-def evaluation_class_AccuracyAUC(Y_train, Y_trpred, Y_test, Y_tepred):
-    score = pd.DataFrame([[accuracy_score(Y_train, Y_trpred), 
-                           roc_auc_score(Y_train, Y_trpred)],
-                          [accuracy_score(Y_test, Y_tepred), 
-                           roc_auc_score(Y_test, Y_tepred)]],
+def evaluation_class_AccuracyAUC(Y_train, P_trpred, Y_test, P_tepred):
+    score = pd.DataFrame([[accuracy_score(Y_train, (P_trpred>=0.5).astype(int)), 
+                           roc_auc_score(Y_train, P_trpred)],
+                          [accuracy_score(Y_test, (P_tepred>=0.5).astype(int)), 
+                           roc_auc_score(Y_test, P_tepred)]],
                          index=['Train', 'Test'], columns=['Accuracy', 'AUC'])
     return score
